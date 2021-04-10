@@ -1,13 +1,11 @@
-html {
-    min-height: 100%;
-}
-
-body {
-    min-height: 100%;
-    height: 100%;
+body{
+    margin: 0px;
+    min-height:100%;
     font-family: Bad Script;
-    background: #91eae4;
-    background: linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5);
+    background: #91eae4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    box-sizing: border-box;
 }
 
 main {
@@ -15,81 +13,175 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
-h1 {
+h1{
     text-transform: uppercase;
     background: #86a8e7;
-    color: white;
+    color:white;
     margin: 0;
-    padding: 10px 28px;
+    padding:10px 28px;
     font-weight: normal;
 }
-
-input {
+input{
     background: white;
     width: 100%;
     box-sizing: border-box;
-    height: 50px;
+    height:50px ;
     font-size: 20px;
     font-weight: 0.5px;
-    padding-left: 25px;
+    padding-left:25px;
     border: 3px solid gray;
     color: gray;
 }
-
-input:focus {
+input:focus{
     background: #edf1f5;
     border: 3px solid #86a8e7;
-    outline: none;
+    outline:none;
     color: #86a8e7;
 }
 
-span.todo-trash {
+span{
     margin-right: 10px;
-    text-align: center;
-    height: 50px;
+    text-align:center;
+    height:50px;
     width: 0;
     opacity: 0;
-    -webkit-transition: 0.3s;
+    -webkit-transition:0.3s;
     transition: 0.3s linear;
 }
 
-i {
+i{
     cursor: pointer;
 }
-
-button {
-    background-color: #86a8e7;
-    border: 2px solid #86a8e7;
+button{
+    background-color:#86a8e7; /* Green */
+    border: none;
     color: white;
     padding: 8px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    border-radius: 4px;
-    font-family: Bad Script;
-    -webkit-transition-duration: 0.4s;
-    /* Safari */
+    font-size: 15px;
+    border-radius:4px;
+    font-family:Bad Script;
+    -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
 
 }
-
 button:hover {
     background-color: white;
     color: black;
     border: 2px solid #86a8e7;
 }
 
-#buttons {
-    display: inline-block;
-    text-align: center;
-    margin: 2px 4px;
+#buttons{
+    display:inline-block;
+    text-align:center;
+    margin-left:13%;
+    position:absolute;
+    bottom:5px;
+}
+#todo{
+    z-index: 2;
+    margin: 0 auto ;
+    max-width: 400px;
+    height:100%;
+    background:white;
+    position:relative;
+    box-shadow: 0px 6px 50px rgba(217, 229, 255, 0.7);
+}
+#overlay{
+    height: 0;
+    width: 100%;
+    position: fixed; 
+    z-index: 3; 
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0, 0.7); 
+    overflow-x: hidden; 
+    transition: 0.5s; 
+    -webkit-transition:  0.5s;
+}
+#overlay .closebtn {
+    position: absolute;
+    top: 15px;
+    right: 40px;
+    font-size: 60px;
+    color:#86a8e7;
+    cursor: pointer;
+}
+#overlay li{
+    padding: 8px;
+    list-style-type:circle;
+    font-size: 30px;
+    color: #818181;
+    display: block;
+}
+.todos{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.todos li{
+    background: #f7f7f7;
+    height:50px;
+    line-height: 50px;
+    cursor: pointer;
+    font-size: 20px;
+}
+.todos li:nth-child(2n){
+    background:#edf1f5;
+}
+.todos li:hover span{
+    width: 50px;
+    opacity: 1.0;
+    margin-left: 5px;
+}
+.display{
+    display:none;
+    transition: 0.3s linear;
+}
+.checked{
+    color:gray;
+    text-decoration:line-through;
+}
+
+.fa-pencil-alt{
+    float: right;
+    padding-top: 8px;
+}
+.fa-trash-alt{
+    color:#7f7fd5;
+}
+.tips{
+    position: relative;
+    top: 20%;
+    width: 100%; 
+    text-align: center; 
+    margin-top: 25px;
+}
+/*  if screen size less than 450px, resize tips lists and close btn so they don't overlap */
+@media screen and (max-height: 450px) {
+    .overlay a {
+        font-size: 20px
+    }
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+    #todo{
+        width:100%;
+        height:100%;
+    }
 }
 
 .circle {
+  margin: 0 auto;
   position: absolute;
   z-index: 1;
   width: 2500px;
@@ -107,139 +199,29 @@ button:hover {
 
 @keyframes fadeCircle{
   0% {
-    width: 2500px;
-    height: 2500px;
-  }
-  10% {
-    width: 2250px;
-    height: 2250px;
+    width: 2534px;
+    height: 2534px;
   }
   20% {
-    width: 2000px;
-    height: 2000px;
-  }
-  30% {
-    width: 1750px;
-    height: 1750px;
+    width: 2134px;
+    height: 2134px;
   }
   40% {
-    width: 1500px;
-    height: 1500px;
-  }
-  50% {
-    width: 1250px;
-    height: 1250px;
+    width: 1734px;
+    height: 1734px;
   }
   60% {
-    width: 1000px;
-    height: 1000px;
-  }
-  70% {
-    width: 750px;
-    height: 750px;
+    width: 1334px;
+    height: 1334px;
   }
   80% {
-    width: 500px;
-    height: 500px;
-  }
-  90% {
-    width: 250px;
-    height: 250px;
+    width: 934px;
+    height: 934px;
   }
   100% {
-    width: 0px;
-    height: 0px;
+    width: 534px;
+    height: 534px;
   }
+}
   
-}
-
-#todo {
-    opacity: 0;
-    z-index: 2;
-    margin: auto auto;
-    box-shadow: 0 0 1em black;
-    max-width: 400px;
-    height: 100%;
-    background: white;
-    position: relative;
-    animation-name: fadeForm;
-    animation-duration: .7s;
-    animation-timing-function: ease-in-out;
-    animation-delay: .85s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-}
-
-@keyframes fadeForm{
-  0% {
-    opacity: 0;
-  }
-  25% {
-    opacity: .25;
-  }
-  50% {
-    opacity: .5;
-  }
-  75% {
-    opacity: .75;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.todos {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.todos li {
-    background: #f7f7f7;
-    height: 50px;
-    line-height: 50px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.todos li span.todo-text {
-    padding: 0 8px;
-}
-
-.todos li:nth-child(2n) {
-    background: #edf1f5;
-}
-
-.todos li:hover span.todo-trash {
-    width: 50px;
-    opacity: 1.0;
-    margin-left: 5px;
-}
-
-.display {
-    display: none;
-    transition: 0.3s linear;
-}
-
-.checked {
-    color: gray;
-    text-decoration: line-through;
-}
-
-.fa-pencil-alt {
-    float: right;
-    padding-top: 8px;
-    padding-left: 8px;
-}
-
-.fa-trash-alt {
-    color: #7f7fd5;
-}
-
-.tips {
-    position: relative;
-    top: 20%;
-    width: 100%;
-    text-align: center;
-    margin-top: 25px;
 }
